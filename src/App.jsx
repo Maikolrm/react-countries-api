@@ -5,6 +5,7 @@ import { fetchRequest } from "./api"
 
 // components
 import Container from "./components/Container.jsx"
+import Header from "./components/Header.jsx"
 import CountrieCard from "./components/CountrieCard/CountrieCard.jsx"
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <Container styles="">
+      <Header />
       <Container styles="grid gap-14 p-14 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {countries.map((countrie, index) => <CountrieCard key={index} countrie={countrie} />)}
       </Container>

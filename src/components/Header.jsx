@@ -1,13 +1,25 @@
+import { useContext } from "react"
+
+// context
+import AppState from "../context/AppState.js"
+import AppDispatch from "../context/AppDispatch.js"
+
 // components
 import Container from "./Container.jsx"
 
 export default function Header(props) {
+  // app state
+  const { darkMode } = useContext(AppState)
+
+  // app dispatch
+  const appDispatch = useContext(AppDispatch)
+
   return(
-    <header className="flex items-center justify-between h-20 px-4 bg-white shadow-md text-gray-800 md:px-14">
+    <header className="flex items-center justify-between h-20 px-4 bg-white shadow-md text-gray-800 md:px-14 dark:bg-element-dark dark:text-gray-100">
       <h1 className="text-lg font-bold lg:text-xl">
         Where in the world?
       </h1>
-      <button onClick={() => alert('Change theme....')} type="button" className="flex capitalize text-base">
+      <button onClick={() => appDispatch({ type: 'set-dark-mode', value: !darkMode })} type="button" className="flex capitalize text-base">
         <span className="inline-block w-10 -rotate-45 leading-10">
           <i className="fa-solid fa-moon" />
         </span>

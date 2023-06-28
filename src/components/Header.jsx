@@ -3,7 +3,7 @@ import Container from "./Container.jsx"
 
 export default function Header(props) {
   return(
-    <header className="flex items-center justify-between h-20 px-4 bg-white shadow-md text-gray-800">
+    <header className="flex items-center justify-between h-20 px-4 bg-white shadow-md text-gray-800 md:px-14">
       <h1 className="text-lg font-bold lg:text-xl">
         Where in the world?
       </h1>

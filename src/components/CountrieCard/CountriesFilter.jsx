@@ -48,8 +48,8 @@ export default function CountriesFilter(props) {
   return(
     <form onSubmit={handleSubmit} className="px-4 my-10 md:flex md:justify-between md:px-14">
       {/* search box */}
-      <Container styles="flex bg-white shadow-lg rounded-lg md:flex-1 md:max-w-xl">
-        <span className="flex items-center justify-center w-14 h-14 text-sm text-center text-gray-400">
+      <Container styles="flex bg-white shadow-lg rounded-lg text-dark-blue md:flex-1 md:max-w-xl dark:bg-element-dark dark:text-gray-200">
+        <span className="flex items-center justify-center w-14 h-14 text-sm text-center">
           <i className="fa-solid fa-search" />
         </span>
         <input 
@@ -62,20 +62,20 @@ export default function CountriesFilter(props) {
       </Container>
       {/* search box end */}
       {/* countrie region selector */}
-      <Container styles="relative w-[20rem] mt-10 text-gray-700 md:mt-0">
-        <button type="button" onClick={() => setShowCountrieCategories(prev => !prev)} className="flex items-center justify-between w-full h-14 bg-white px-4 rounded-lg shadow-lg text-left capitalize">
+      <Container styles="relative w-[20rem] mt-10 bg-white rounded-lg text-dark-blue md:mt-0 dark:bg-element-dark dark:text-gray-200">
+        <button type="button" onClick={() => setShowCountrieCategories(prev => !prev)} className="flex items-center justify-between w-full h-14 px-4 rounded-lg shadow-lg text-left capitalize">
           {selectedRegion ? selectedRegion : 'Filter by region'}
-          <span className="flex items-center justify-center w-10 h-10 text-sm text-center text-gray-400">
+          <span className="flex items-center justify-center w-10 h-10 text-sm text-center">
             <i className={`fa-solid ${showCountrieCategories ? 'fa-angle-up' : 'fa-angle-down'}`} />
           </span>
         </button>
         {showCountrieCategories ? (
-          <Container styles="absolute top-full w-full grid gap-1 bg-white mt-2 p-2 rounded-lg shadow-lg">
+          <Container styles="absolute top-full w-full grid gap-1 bg-white mt-2 p-2 rounded-lg shadow-lg text-dark-blue dark:bg-element-dark dark:text-gray-200">
             {countriesRegions.map(region => (
               <button 
                 key={region}
                 type="button"
-                className={`block w-full px-5 ${selectedRegion == region ? 'bg-gray-200' : ''} rounded text-left leading-[3rem] transition duration-100 hover:bg-gray-200`}
+                className={`block w-full px-5 ${selectedRegion == region ? 'bg-gray-200 dark:bg-dark-bg' : ''} rounded text-left leading-[3rem] transition duration-100 hover:bg-gray-200 dark:hover:bg-dark-bg`}
                 onClick={() => handleCountrieRegionClick(region)}
                 disabled={selectedRegion == region}
               >

@@ -1,5 +1,8 @@
 import { useState, useEffect, useContext } from "react"
 
+// api
+import { fetchRequest } from "../../api/"
+
 // context
 import AppState from "../../context/AppState.js"
 import AppDispatch from "../../context/AppDispatch.js"
@@ -9,7 +12,12 @@ import Container from "../Container.jsx"
 
 export default function CountriesFilter(props) {
   // app state
-  const { countriesRegions, selectedRegion, query } = useContext(AppState)
+  const {
+    countriesRegions,
+    selectedRegion,
+    query,
+    searchCountrie
+  } = useContext(AppState)
 
   // app dispatch
   const appDispatch = useContext(AppDispatch)
@@ -23,8 +31,22 @@ export default function CountriesFilter(props) {
     setShowCountrieCategories(false)
   }
 
+  // handleSubmit
+  async function handleSubmit(e) {
+    try {
+      e.preventDefault()
+      console.log(searchCountrie)
+      if (searchCountrie) {
+        const response = await fetchRequest(`/name/${query}`)
+        console.log(response)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return(
-    <Container styles="px-4 my-10 md:flex md:justify-between">
+    <form onSubmit={handleSubmit} className="px-4 my-10 md:flex md:justify-between">
       {/* search box */}
       <Container styles="flex bg-white shadow-lg rounded-lg">
         <span className="flex items-center justify-center w-14 h-14 text-sm text-center text-gray-400">
@@ -41,7 +63,7 @@ export default function CountriesFilter(props) {
       {/* search box end */}
       {/* countrie region selector */}
       <Container styles="relative max-w-xs mt-10 text-gray-700 md:mt-0">
-        <button onClick={() => setShowCountrieCategories(prev => !prev)} className="flex items-center justify-between w-full h-14 bg-white px-4 rounded-lg shadow-lg text-left capitalize">
+        <button type="button" onClick={() => setShowCountrieCategories(prev => !prev)} className="flex items-center justify-between w-full h-14 bg-white px-4 rounded-lg shadow-lg text-left capitalize">
           {selectedRegion ? selectedRegion : 'Filter by region'}
           <span className="flex items-center justify-center w-10 h-10 text-sm text-center text-gray-400">
             <i className={`fa-solid ${showCountrieCategories ? 'fa-angle-up' : 'fa-angle-down'}`} />
@@ -52,6 +74,7 @@ export default function CountriesFilter(props) {
             {countriesRegions.map(region => (
               <button 
                 key={region}
+                type="button"
                 className="block w-full px-5 rounded text-left leading-[3rem] transition duration-100 hover:bg-gray-100"
                 onClick={() => handleCountrieRegionClick(region)}>
                 {region.slice(0, 1).toUpperCase() + region.slice(1)}
@@ -61,7 +84,7 @@ export default function CountriesFilter(props) {
         ) : ('')}
       </Container>
       {/* countrie region selector end */}
-    </Container>
+    </form>
   )
 
 }

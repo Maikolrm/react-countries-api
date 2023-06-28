@@ -46,6 +46,7 @@ function App() {
         break
       case "set-countries-region":
         draft.query = ''
+        draft.loading = true
         draft.selectedRegion = action.value
         break
       case "search-countrie":

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 // base url
-axios.defaults.baseURL = `https://restcountries.com/v3.1/`
+axios.defaults.baseURL = `https://restcountries.com/v3.1`
 
 export const fetchRequest = async function(route) {
   try {

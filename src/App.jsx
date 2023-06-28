@@ -57,7 +57,7 @@ function App() {
         if (mounted) {
           // console.log(response[0])
           console.log(response.length)
-          dispatch({ type: 'set-countries', value: response.slice(0, 10) })
+          dispatch({ type: 'set-countries', value: response.slice(0, 30) })
         }
       } catch (e) {
         console.log(e)

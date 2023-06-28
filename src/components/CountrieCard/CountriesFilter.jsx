@@ -1,14 +1,21 @@
-import { useState } from "react"
+import { useState, useEffect, useContext } from "react"
+
+// context
+import AppState from "../../context/AppState.js"
+import AppDispatch from "../../context/AppDispatch.js"
 
 // components
 import Container from "../Container.jsx"
 
 export default function CountriesFilter(props) {
+  // app state
+  const { countriesRegions, query } = useContext(AppState)
+
+  // app dispatch
+  const appDispatch = useContext(AppDispatch)
+
   // state
   const [showCountrieCategories, setShowCountrieCategories] = useState(false)
-
-  // temp countrie regios
-  const regions = ['africa', 'america', 'acia', 'europe', 'oceania']
 
   // handleCountrieRegionClick
   function handleCountrieRegionClick(region) {
@@ -23,11 +30,11 @@ export default function CountriesFilter(props) {
           <i className="fa-solid fa-search" />
         </span>
         <input 
-          className="outline-none block w-full leading-10"
+          className="outline-none block w-full capitalize leading-10"
           type="text"
-          value=""
+          value={query}
           placeholder="Search for a country..."
-          onChange={(e) => console.log(e.target.value)}
+          onChange={(e) => appDispatch({ type: 'set-query', value: e.target.value})}
         />
       </Container>
       {/* search box end */}
@@ -41,7 +48,7 @@ export default function CountriesFilter(props) {
         </button>
         {showCountrieCategories ? (
           <Container styles="absolute top-full w-full grid gap-1 bg-white mt-2 p-2 rounded-lg shadow-lg">
-            {regions.map(region => (
+            {countriesRegions.map(region => (
               <button 
                 key={region}
                 className="block w-full px-5 rounded text-left leading-[3rem] transition duration-100 hover:bg-gray-100"

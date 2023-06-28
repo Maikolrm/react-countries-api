@@ -89,7 +89,7 @@ function App() {
         <Header />
         <Container styles="">
           <CountriesFilter />
-          <Container styles="grid gap-14 px-14 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          <Container styles="grid gap-14 p-14 pt-0 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {state.countries.filter(prev => prev.name.common.toLowerCase().includes(state.query)).map(countrie => <CountrieCard key={countrie.name.common} countrie={countrie} />)}
           </Container>
         </Container>

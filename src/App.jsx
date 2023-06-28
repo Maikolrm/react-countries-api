@@ -13,6 +13,7 @@ import Container from "./components/Container.jsx"
 import Header from "./components/Header.jsx"
 import CountrieCard from "./components/CountrieCard/CountrieCard.jsx"
 import CountriesFilter from "./components/CountrieCard/CountriesFilter.jsx"
+import Loader from "./components/Loader.jsx"
 
 function App() {
   // initialState
@@ -37,6 +38,7 @@ function App() {
     switch(action.type) {
       case "set-countries":
         draft.countries = action.value
+        draft.loading = false
         break
       case "set-query":
         // console.log(action.value)
@@ -90,6 +92,7 @@ function App() {
             {state.countries.filter(prev => prev.name.common.toLowerCase().includes(state.query)).map(countrie => <CountrieCard key={countrie.name.common} countrie={countrie} />)}
           </Container>
         </Container>
+        {state.loading ? <Loader /> : ('')}
       </AppDispatch.Provider>
     </AppState.Provider>
   )

@@ -29,7 +29,7 @@ function App() {
     selectedRegion: '',
     query: '',
     searchCountrie: false,
-    darkMode: false,
+    darkMode: localStorage.getItem('darkMode'),
     loading: true
   }
 
@@ -51,6 +51,9 @@ function App() {
         break
       case "search-countrie":
         draft.searchCountrie = action.value
+        break
+      case "set-dark-mode":
+        draft.darkMode = action.value
         break
     }
   }
@@ -82,6 +85,17 @@ function App() {
     const hideCountriesCount = state.countries.filter(prev => !prev.name.common.toLowerCase().includes(state.query)).length
     dispatch({ type: 'search-countrie', value: hideCountriesCount == countriesCount })
   }, [state.query])
+
+  // watching darkMode changes
+  useEffect(() => {
+    if (state.darkMode) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkMode', 1)
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.removeItem('darkMode')
+    }
+  }, [state.darkMode])
 
   return (
     <AppState.Provider value={state}>

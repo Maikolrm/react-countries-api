@@ -27,7 +27,9 @@ function App() {
     ],
     selectedRegion: '',
     query: '',
-    darkMode: false
+    searchCountrie: false,
+    darkMode: false,
+    loading: true
   }
 
   // reducer
@@ -41,7 +43,11 @@ function App() {
         draft.query = action.value.trim() ? action.value.toLowerCase() : ''
         break
       case "set-countries-region":
+        draft.query = ''
         draft.selectedRegion = action.value
+        break
+      case "search-countrie":
+        draft.searchCountrie = action.value
         break
     }
   }
@@ -66,6 +72,13 @@ function App() {
     fetchCountries()
     return () => mounted = false
   }, [state.selectedRegion])
+
+  // watching for query changes
+  useEffect(() => {
+    const countriesCount = state.countries.length
+    const hideCountriesCount = state.countries.filter(prev => !prev.name.common.toLowerCase().includes(state.query)).length
+    dispatch({ type: 'search-countrie', value: hideCountriesCount == countriesCount })
+  }, [state.query])
 
   return (
     <AppState.Provider value={state}>

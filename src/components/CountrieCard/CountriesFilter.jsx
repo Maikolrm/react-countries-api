@@ -62,7 +62,7 @@ export default function CountriesFilter(props) {
       </Container>
       {/* search box end */}
       {/* countrie region selector */}
-      <Container styles="relative max-w-xs mt-10 text-gray-700 md:mt-0">
+      <Container styles="relative w-[20rem] mt-10 text-gray-700 md:mt-0">
         <button type="button" onClick={() => setShowCountrieCategories(prev => !prev)} className="flex items-center justify-between w-full h-14 bg-white px-4 rounded-lg shadow-lg text-left capitalize">
           {selectedRegion ? selectedRegion : 'Filter by region'}
           <span className="flex items-center justify-center w-10 h-10 text-sm text-center text-gray-400">

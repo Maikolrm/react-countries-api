@@ -40,21 +40,24 @@ function App() {
         // console.log(action.value)
         draft.query = action.value.trim() ? action.value.toLowerCase() : ''
         break
+      case "set-countries-region":
+        draft.selectedRegion = action.value
+        break
     }
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState)
 
-  // component mounted
+  // watching for selectedRegion changes
   useEffect(() => {
     let mounted = true
     async function fetchCountries() {
       try {
-        const response = await fetchRequest('/region/america')
+        const response = await fetchRequest(state.selectedRegion ? `/region/${state.selectedRegion}` : '/all')
         if (mounted) {
           // console.log(response[0])
           console.log(response.length)
-          dispatch({ type: 'set-countries', value: response.slice(0, 30) })
+          dispatch({ type: 'set-countries', value: response.slice(0, 10) })
         }
       } catch (e) {
         console.log(e)
@@ -62,7 +65,7 @@ function App() {
     }
     fetchCountries()
     return () => mounted = false
-  }, [])
+  }, [state.selectedRegion])
 
   return (
     <AppState.Provider value={state}>

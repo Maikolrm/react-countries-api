@@ -75,7 +75,7 @@ export default function CountriesFilter(props) {
               <button 
                 key={region}
                 type="button"
-                className="block w-full px-5 rounded text-left leading-[3rem] transition duration-100 hover:bg-gray-100"
+                className={`block w-full px-5 ${selectedRegion == region ? 'bg-gray-200' : ''} rounded text-left leading-[3rem] transition duration-100 hover:bg-gray-200`}
                 onClick={() => handleCountrieRegionClick(region)}>
                 {region.slice(0, 1).toUpperCase() + region.slice(1)}
               </button>

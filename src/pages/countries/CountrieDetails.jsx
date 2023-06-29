@@ -45,7 +45,7 @@ export default function CountrieDetails(props) {
   return(
     <Container styles="p-8 px-4 md:px-14">
       <Container styles="pb-12">
-        <Link to="/" className="flex w-28 leading-10 bg-white rounded-md shadow-lg capitalize text-dark-blue dark:bg-element-dark dark:text-gray-200">
+        <Link to={`/countrie-region/${countrie.region}`} className="flex w-28 leading-10 bg-white rounded-md shadow-lg capitalize text-dark-blue dark:bg-element-dark dark:text-gray-200">
           <span className="blcok w-10 h-10 text-center leading-10">
             <i className="fa-solid fa-arrow-left"/>
           </span>

@@ -8,7 +8,7 @@ export default function CountrieCard({ countrie }) {
   return(
     <Link to={`/countrie-details/${countrie.cca2}`}>
       <Container styles="bg-white shadow-xl rounded-lg overflow-hidden dark:bg-element-dark">
-        <CountrieFlag countrie={countrie} />
+        <CountrieFlag countrie={countrie} styles="h-[50vw]" media="md:h-[30vw] xl:h-[15vw] xl:max-h-[20rem]" />
         <Container styles="p-4">
           <h2 className="text-xl font-bold capitalize text-gray-900 leading-10 dark:text-gray-200">
             {countrie.name.common}

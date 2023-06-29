@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react"
+import { NavLink, useParams } from "react-router-dom"
 
 // context
 import CountriesState from "../context/CountriesState.js"
@@ -8,10 +9,12 @@ import CountriesDispatch from "../context/CountriesDispatch.js"
 import Container from "../../../components/Container.jsx"
 
 export default function CountriesFilter(props) {
+  // params
+  const params = useParams()
+
   // app state
   const {
     countriesRegions,
-    selectedRegion,
     query,
     searchCountrie
   } = useContext(CountriesState)
@@ -21,12 +24,6 @@ export default function CountriesFilter(props) {
 
   // state
   const [showCountrieCategories, setShowCountrieCategories] = useState(false)
-
-  // handleCountrieRegionClick
-  function handleCountrieRegionClick(region) {
-    countriesDispatch({ type: 'set-countries-region', value: region })
-    setShowCountrieCategories(false)
-  }
 
   // handleSubmit
   async function handleSubmit(e) {
@@ -61,7 +58,7 @@ export default function CountriesFilter(props) {
       {/* countrie region selector */}
       <Container styles="relative w-[20rem] mt-10 bg-white rounded-lg text-dark-blue md:mt-0 dark:bg-element-dark dark:text-gray-200">
         <button type="button" onClick={() => setShowCountrieCategories(prev => !prev)} className="flex items-center justify-between w-full h-14 px-4 rounded-lg shadow-lg text-left capitalize">
-          {selectedRegion ? selectedRegion : 'Filter by region'}
+          {params.region ? params.region : 'filter by region'}
           <span className="flex items-center justify-center w-10 h-10 text-sm text-center">
             <i className={`fa-solid ${showCountrieCategories ? 'fa-angle-up' : 'fa-angle-down'}`} />
           </span>
@@ -69,15 +66,14 @@ export default function CountriesFilter(props) {
         {showCountrieCategories ? (
           <Container styles="absolute top-full w-full grid gap-1 bg-white mt-2 p-2 rounded-lg shadow-lg text-dark-blue dark:bg-element-dark dark:text-gray-200">
             {countriesRegions.map(region => (
-              <button 
+              <NavLink 
+                to={`/countrie-region/${region}`}
                 key={region}
                 type="button"
-                className={`block w-full px-5 ${selectedRegion == region ? 'bg-gray-200 dark:bg-dark-bg' : ''} rounded text-left leading-[3rem] transition duration-100 hover:bg-gray-200 dark:hover:bg-dark-bg`}
-                onClick={() => handleCountrieRegionClick(region)}
-                disabled={selectedRegion == region}
+                className={({ isActive }) => `block w-full px-5 ${isActive ? 'bg-gray-200 dark:bg-dark-bg' : ''} rounded text-left leading-[3rem] transition duration-100 hover:bg-gray-200 dark:hover:bg-dark-bg`}
               >
                 {region.slice(0, 1).toUpperCase() + region.slice(1)}
-              </button>
+              </NavLink>
             ))}
           </Container>
         ) : ('')}

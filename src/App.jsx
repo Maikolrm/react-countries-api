@@ -46,6 +46,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Countries />} />
+              <Route path="countrie-region/:region" element={<Countries />} />
               <Route path="countrie-details/:code" element={<CountrieDetails />} />
             </Route>
           </Routes>

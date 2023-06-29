@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useImmerReducer } from "use-immer"
+import { useParams } from "react-router-dom"
 
 // api
 import { fetchRequest } from "../../api/"
@@ -15,6 +16,9 @@ import CountriesFilter from "./components/CountriesFilter.jsx"
 import Loader from "../../components/Loader.jsx"
 
 export default function Countries(props) {
+  // params
+  const params = useParams()
+
   // initial state
   const initialState = {
     countries: [],
@@ -25,7 +29,6 @@ export default function Countries(props) {
       'europe',
       'oceania'
     ],
-    selectedRegion: '',
     searchCountrie: false,
     query: '',
     loading: true
@@ -34,16 +37,15 @@ export default function Countries(props) {
   // reducer
   function reducer(draft, action) {
     switch(action.type) {
+      case "set-loading":
+        draft.loading = action.value
+        break
       case "set-countries":
         draft.countries = action.value
         draft.loading = false
         break
       case "set-query":
         draft.query = action.value.trim() ? action.value.toLowerCase() : ''
-        break
-      case "set-countries-region":
-        draft.loading = true
-        draft.selectedRegion = action.value
         break
       case "search-countrie":
         draft.searchCountrie = action.value
@@ -58,9 +60,10 @@ export default function Countries(props) {
     let mounted = true
     async function fetchCountries() {
       try {
-        const response = await fetchRequest(state.selectedRegion ? `/region/${state.selectedRegion}` : '/all')
+        dispatch({ type: 'set-loading', value: true })
+        const response = await fetchRequest(params.region ? `/region/${params.region}` : '/all')
         if (mounted) {
-          console.log(response[1])
+          // console.log(response[1])
           dispatch({ type: 'set-countries', value: response.slice(0, 30) })
         }
       } catch (e) {
@@ -69,7 +72,7 @@ export default function Countries(props) {
     }
     fetchCountries()
     return () => mounted = false
-  }, [state.selectedRegion])
+  }, [params.region])
 
 
   // watching for query changes

@@ -40,7 +40,7 @@ export default function CountriesFilter(props) {
   }
 
   return(
-    <form onSubmit={handleSubmit} className="px-4 my-10 md:flex md:justify-between md:px-14">
+    <form onSubmit={handleSubmit} className="px-4 my-10 md:flex md:justify-between md:px-14 4xl:px-0">
       {/* search box */}
       <Container styles="flex bg-white shadow-lg rounded-lg text-dark-blue md:flex-1 md:max-w-xl dark:bg-element-dark dark:text-gray-200">
         <span className="flex items-center justify-center w-14 h-14 text-sm text-center">

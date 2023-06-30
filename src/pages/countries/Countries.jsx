@@ -87,9 +87,11 @@ export default function Countries(props) {
   return(
     <CountriesState.Provider value={state}>
       <CountriesDispatch.Provider value={dispatch}>
-        <CountriesFilter />
-        <Container styles="grid gap-14 p-14 pt-0 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          {state.countries.filter(prev => prev.name.common.toLowerCase().includes(state.query)).map(countrie => <CountrieCard key={countrie.name.common} countrie={countrie} />)}
+        <Container styles="pb-14 max-w-screen-4xl m-auto">
+          <CountriesFilter />
+          <Container styles="grid gap-14 px-14 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 4xl:px-0">
+            {state.countries.filter(prev => prev.name.common.toLowerCase().includes(state.query)).map(countrie => <CountrieCard key={countrie.name.common} countrie={countrie} />)}
+          </Container>
         </Container>
       </CountriesDispatch.Provider>
     </CountriesState.Provider>

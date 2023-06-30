@@ -11,6 +11,7 @@ import CountriesDispatch from "./context/CountriesDispatch.js"
 
 // components
 import Container from "../../components/Container.jsx"
+import Page from "../../components/Page.jsx"
 import CountrieCard from "./components/CountrieCard.jsx"
 import CountriesFilter from "./components/CountriesFilter.jsx"
 import Loader from "../../components/Loader.jsx"
@@ -90,12 +91,14 @@ export default function Countries(props) {
   return(
     <CountriesState.Provider value={state}>
       <CountriesDispatch.Provider value={dispatch}>
-        <Container styles="pb-14 max-w-screen-4xl m-auto">
-          <CountriesFilter />
-          <Container styles="grid gap-14 px-14 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 4xl:px-0">
-            {state.countries.filter(prev => prev.name.toLowerCase().includes(state.query)).map(countrie => <CountrieCard key={countrie.area} countrie={countrie} />)}
+        <Page title={params.region ? `countries region - ${params.region}` : 'frontend mentor'}>
+          <Container styles="pb-14 max-w-screen-4xl m-auto">
+            <CountriesFilter />
+            <Container styles="grid gap-14 px-14 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 4xl:px-0">
+              {state.countries.filter(prev => prev.name.toLowerCase().includes(state.query)).map(countrie => <CountrieCard key={countrie.area} countrie={countrie} />)}
+            </Container>
           </Container>
-        </Container>
+        </Page>
       </CountriesDispatch.Provider>
     </CountriesState.Provider>
   )

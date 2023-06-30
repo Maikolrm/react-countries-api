@@ -24,7 +24,7 @@ export default function Countries(props) {
     countries: [],
     countriesRegions: [
       'africa',
-      'america',
+      'americas',
       'asia',
       'europe',
       'oceania'

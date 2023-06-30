@@ -69,7 +69,7 @@ export default function CountrieDetails(props) {
                   <Paragraph label='capital' content={countrie.capital} />
                 </Container>
                 <Container styles="grid gap-6 content-start mt-10 sm:mt-0 sm:pl-14">
-                  <Paragraph label='top level domain' content={countrie.tld[0]} />
+                  <Paragraph label='top level domain' content={Boolean(countrie.tld.length) ? countrie.tld[0] : ''} />
                   <Paragraph label='currencies' content={Object.values(countrie.currencies)[0].name} />
                   <Paragraph label='languages' content={Object.values(countrie.languages).join(', ')} />
                 </Container>

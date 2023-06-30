@@ -10,6 +10,7 @@ import Container from "../../components/Container.jsx"
 import Paragraph from "../../components/Paragraph.jsx"
 import Loader from "../../components/Loader.jsx"
 import CountrieFlag from "./components/CountrieFlag.jsx"
+import CountrieBorder from "./components/CountrieBorder.jsx"
 
 export default function CountrieDetails(props) {
   // params
@@ -46,7 +47,7 @@ export default function CountrieDetails(props) {
     <Container styles="p-8 px-4 md:px-14">
       <Container styles="max-w-2xl m-auto xl:max-w-screen-4xl">
         <Container styles="pb-12">
-          <Link to={`/countrie-region/${countrie.region}`} className="flex w-28 leading-10 bg-white rounded-md shadow-lg capitalize text-dark-blue dark:bg-element-dark dark:text-gray-200">
+          <Link to={`/countrie-region/${countrie.region.toLowerCase()}`} className="flex w-28 leading-10 bg-white rounded-md shadow-lg capitalize text-dark-blue dark:bg-element-dark dark:text-gray-200">
             <span className="blcok w-10 h-10 text-center leading-10">
               <i className="fa-solid fa-arrow-left"/>
             </span>
@@ -80,11 +81,7 @@ export default function CountrieDetails(props) {
                     border countries:
                   </h4>
                   <Container styles="grid grid-cols-3 gap-2 pt-8 sm:grid-cols-4">
-                    {countrie.borders.map(border => (
-                      <Link to={`/countrie-details/${border}`} key={border} className="flex-1 rounded-md border-2 border-gray-200 text-center text-sm leading-10 dark:bg-element-dark dark:border-dark-blue/70">
-                        {border}
-                      </Link>
-                    ))}
+                    {countrie.borders.map(border => <CountrieBorder key={border} border={border} />)}
                   </Container>
                 </Container>
               ) : ('')}

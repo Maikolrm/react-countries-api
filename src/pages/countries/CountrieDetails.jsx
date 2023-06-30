@@ -27,10 +27,12 @@ export default function CountrieDetails(props) {
       try {
         // params.code = <countrie_cca2_code>
         setLoading(true)
-        const response = await fetchRequest(`/alpha/${params.code}`)
+        const response = await fetchRequest(`/countries.json`)
         if (mounted) {
           // console.log(response)
-          setCountrie(response[0])
+          const currentCountrie = response.filter(prev => prev.alpha3Code.toLowerCase() == params.code)[0]
+          console.log(currentCountrie)
+          setCountrie(currentCountrie)
           setLoading(false)
         }
       } catch (e) {
@@ -63,16 +65,16 @@ export default function CountrieDetails(props) {
             <Container styles="grid gap-14 mt-8">
               <Container styles="text-dark-blue sm:flex">
                 <Container styles="grid gap-6 content-start">
-                  <Paragraph label='native name' content={Object.values(countrie.name.nativeName)[0].official} />
+                  <Paragraph label='native name' content={countrie.nativeName} />
                   <Paragraph label='population' content={countrie.population} />
                   <Paragraph label='region' content={countrie.region} />
                   <Paragraph label='sub region' content={countrie.subregion} />
                   <Paragraph label='capital' content={countrie.capital} />
                 </Container>
                 <Container styles="grid gap-6 content-start mt-10 sm:mt-0 sm:pl-14">
-                  <Paragraph label='top level domain' content={Boolean(countrie.tld.length) ? countrie.tld[0] : ''} />
-                  <Paragraph label='currencies' content={Object.values(countrie.currencies)[0].name} />
-                  <Paragraph label='languages' content={Object.values(countrie.languages).join(', ')} />
+                  <Paragraph label='top level domain' content={countrie.topLevelDomain} />
+                  <Paragraph label='currencies' content={countrie.currencies[0].name} />
+                  <Paragraph label='languages' content={countrie.languages.map(prev => prev.name).join(', ')} />
                 </Container>
               </Container>
               {countrie.borders ? (

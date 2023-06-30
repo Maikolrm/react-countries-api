@@ -13,9 +13,11 @@ export default function CountrieBorder({ border }) {
     let mounted = true
     async function fetchCountrie() {
       try {
-        const response = await fetchRequest(`/alpha/${border}`)
+        // border = <countrie_alpha3Code>
+        const response = await fetchRequest('/countries.json')
         if (mounted) {
-          setCountrie(response[0])
+          const currentCountrie = response.filter(prev => prev.alpha3Code.toLowerCase() == border.toLowerCase())[0]
+          setCountrie(currentCountrie)
         }
       } catch (e) {
         console.log(e)
@@ -29,8 +31,8 @@ export default function CountrieBorder({ border }) {
     <Link 
       to={`/countrie-details/${border.toLowerCase()}`}
       key={border}
-      className="flex-1 rounded-md border-2 border-gray-200 text-center text-sm leading-10 dark:bg-element-dark dark:border-dark-blue/70">
-      {countrie ? countrie.name.common : <i className="fa-solid fa-circle-notch text-sky-400 animate-spin" />}
+      className="flex-1 px-4 rounded-md border-2 border-gray-200 text-center text-sm leading-10 truncate dark:bg-element-dark dark:border-dark-blue/70">
+      {countrie ? countrie.name : <i className="fa-solid fa-circle-notch text-sky-400 animate-spin" />}
     </Link>
   )
 }

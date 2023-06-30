@@ -61,10 +61,13 @@ export default function Countries(props) {
     async function fetchCountries() {
       try {
         dispatch({ type: 'set-loading', value: true })
-        const response = await fetchRequest(params.region ? `/region/${params.region}` : '/all')
+        const response = await fetchRequest('/countries.json')
         if (mounted) {
-          // console.log(response[1])
-          dispatch({ type: 'set-countries', value: response.slice(0, 30) })
+          const region = params.region ? params.region.toLowerCase() : ''
+          dispatch({
+            type: 'set-countries',
+            value: response.filter(prev => prev.region.toLowerCase().includes(region)).slice(0, 32)
+          }) // dispatch end
         }
       } catch (e) {
         console.log(e)
@@ -78,8 +81,8 @@ export default function Countries(props) {
   // watching for query changes
   useEffect(() => {
     const countriesCount = state.countries.length
-    const hideCountriesCount = state.countries.filter(prev => !prev.name.common.toLowerCase().includes(state.query)).length
-    dispatch({ type: 'search-countrie', value: hideCountriesCount == countriesCount })
+    const hideCountriesCount = state.countries.filter(prev => !prev.name.toLowerCase().includes(state.query)).length
+    dispatch({ type: 'search-countrie', value: countriesCount && hideCountriesCount == countriesCount })
   }, [state.query])
 
   if (state.loading) return <Loader />
@@ -90,7 +93,7 @@ export default function Countries(props) {
         <Container styles="pb-14 max-w-screen-4xl m-auto">
           <CountriesFilter />
           <Container styles="grid gap-14 px-14 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 4xl:px-0">
-            {state.countries.filter(prev => prev.name.common.toLowerCase().includes(state.query)).map(countrie => <CountrieCard key={countrie.name.common} countrie={countrie} />)}
+            {state.countries.filter(prev => prev.name.toLowerCase().includes(state.query)).map(countrie => <CountrieCard key={countrie.area} countrie={countrie} />)}
           </Container>
         </Container>
       </CountriesDispatch.Provider>

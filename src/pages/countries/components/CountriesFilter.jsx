@@ -39,9 +39,10 @@ export default function CountriesFilter(props) {
       console.log(searchCountrie)
       if (searchCountrie) {
         setSearching(true)
-        const response = await fetchRequest(`/name/${query}`)
+        // const response = await fetchRequest(`/name/${query}`)
+        const response = await fetchRequest(`/countries.json`)
         if (response.length) {
-          countriesDispatch({ type: 'set-countries', value: response.concat(...countries) })
+          countriesDispatch({ type: 'set-countries', value: response.filter(prev => prev.name.toLowerCase().includes(query)).concat(...countries) })
           countriesDispatch({ type: 'set-query', value: '' })
         }
         countriesDispatch({ type: 'search-countrie', value: false })

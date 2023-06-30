@@ -1,6 +1,9 @@
 import { useState, useEffect, useContext } from "react"
 import { NavLink, useParams } from "react-router-dom"
 
+// api
+import { fetchRequest } from "../../../api/"
+
 // context
 import CountriesState from "../context/CountriesState.js"
 import CountriesDispatch from "../context/CountriesDispatch.js"
@@ -12,8 +15,12 @@ export default function CountriesFilter(props) {
   // params
   const params = useParams()
 
+  // local state
+  const [searching, setSearching] = useState(false)
+
   // app state
   const {
+    countries,
     countriesRegions,
     query,
     searchCountrie
@@ -31,8 +38,14 @@ export default function CountriesFilter(props) {
       e.preventDefault()
       console.log(searchCountrie)
       if (searchCountrie) {
+        setSearching(true)
         const response = await fetchRequest(`/name/${query}`)
-        console.log(response)
+        if (response.length) {
+          countriesDispatch({ type: 'set-countries', value: response.concat(...countries) })
+          countriesDispatch({ type: 'set-query', value: '' })
+        }
+        countriesDispatch({ type: 'search-countrie', value: false })
+        setSearching(false)
       }
     } catch (e) {
       console.log(e)
@@ -51,8 +64,12 @@ export default function CountriesFilter(props) {
           type="text"
           value={query}
           placeholder="Search for a country..."
+          disabled={searching}
           onChange={(e) => countriesDispatch({ type: 'set-query', value: e.target.value})}
         />
+        <span className={`flex items-center justify-center w-14 h-14 text-sm text-center text-dark-blue ${searchCountrie ? `${searching ? 'animate-spin' : ''}` : 'invisible'} dark:text-sky-500`}>
+          <i className={`fa-solid ${searching ? 'fa-circle-notch' : 'fa-arrow-left'}`} />
+        </span>
       </Container>
       {/* search box end */}
       {/* countrie region selector */}

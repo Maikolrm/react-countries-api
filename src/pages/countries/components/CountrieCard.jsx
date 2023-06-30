@@ -6,7 +6,7 @@ import CountrieFlag from "./CountrieFlag.jsx"
 
 export default function CountrieCard({ countrie }) {
   return(
-    <Link to={`/countrie-details/${countrie.cca2}`}>
+    <Link to={`/countrie-details/${countrie.cca2.toLowerCase()}`}>
       <Container styles="bg-white shadow-xl rounded-lg overflow-hidden dark:bg-element-dark">
         <CountrieFlag countrie={countrie} styles="h-[50vw]" media="md:h-[30vw] xl:h-[15vw] xl:max-h-[20rem]" />
         <Container styles="p-4">

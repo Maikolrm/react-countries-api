@@ -62,7 +62,7 @@ export default function CountrieDetails(props) {
             <CountrieFlag countrie={countrie} styles="rounded-lg shadow-lg overflow-hidden" media="xl:flex-1 xl:h-[30vw] xl:max-h-[40rem]" />
             <Container styles="pt-12 xl:flex xl:flex-col xl:flex-1 xl:justify-center xl:pt-0">
               <h2 className="font-bold text-3xl text-dark-blue leading-none dark:text-gray-200">
-                {countrie.name.common}
+                {countrie.name}
               </h2>
               <Container styles="grid gap-14 mt-8">
                 <Container styles="text-dark-blue sm:flex">

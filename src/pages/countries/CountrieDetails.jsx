@@ -71,11 +71,21 @@ export default function CountrieDetails(props) {
                     <Paragraph label='population' content={countrie.population} />
                     <Paragraph label='region' content={countrie.region} />
                     <Paragraph label='sub region' content={countrie.subregion} />
-                    <Paragraph label='capital' content={countrie.capital} />
+                    {countrie.capital ? (
+                      <Paragraph
+                        label='capital'
+                        content={countrie.capital}
+                      />
+                    ) : ('')}
                   </Container>
                   <Container styles="grid gap-6 content-start mt-10 sm:mt-0 sm:pl-14">
                     <Paragraph label='top level domain' content={countrie.topLevelDomain} />
-                    <Paragraph label='currencies' content={countrie.currencies[0].name} />
+                    {countrie.currencies ? (
+                      <Paragraph 
+                        label='currencies'
+                        content={countrie.currencies[0].name}
+                      />
+                    ) : ('')}
                     <Paragraph label='languages' content={countrie.languages.map(prev => prev.name).join(', ')} />
                   </Container>
                 </Container>

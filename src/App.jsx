@@ -10,6 +10,7 @@ import AppDispatch from "./context/AppDispatch.js"
 import Layout from "./pages/Layout.jsx"
 import Countries from "./pages/countries/Countries.jsx"
 import CountrieDetails from "./pages/countries/CountrieDetails.jsx"
+import NotFound from "./pages/NotFound.jsx"
 
 function App() {
   // initialState
@@ -48,6 +49,7 @@ function App() {
               <Route index element={<Countries />} />
               <Route path="countrie-region/:region" element={<Countries />} />
               <Route path="countrie-details/:code" element={<CountrieDetails />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </AppDispatch.Provider>

@@ -21,7 +21,7 @@ export default function CountrieCard({ countrie }) {
               <span className="font-semibold">region:</span> {countrie.region}
             </p>
             <p className="text-md capitalize leading-10">
-              <span className="font-semibold">capital:</span> {countrie.capital}
+              <span className="font-semibold">capital:</span> {countrie.capital ? countrie.capital : '-'}
             </p>
           </Container>
         </Container>

@@ -68,7 +68,7 @@ export default function CountrieDetails(props) {
                 <Container styles="text-dark-blue sm:flex">
                   <Container styles="grid gap-6 content-start">
                     <Paragraph label='native name' content={countrie.nativeName} />
-                    <Paragraph label='population' content={countrie.population} />
+                    <Paragraph label='population' content={countrie.population.toLocaleString()} />
                     <Paragraph label='region' content={countrie.region} />
                     <Paragraph label='sub region' content={countrie.subregion} />
                     {countrie.capital ? (

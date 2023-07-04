@@ -15,7 +15,7 @@ export default function CountrieCard({ countrie }) {
           </h2>
           <Container styles="text-dark-blue dark:text-gray-200">
             <p className="text-md capitalize leading-10">
-              <span className="font-semibold">population:</span> {countrie.population}
+              <span className="font-semibold">population:</span> {countrie.population.toLocaleString()}
             </p>
             <p className="text-md capitalize leading-10">
               <span className="font-semibold">region:</span> {countrie.region}
